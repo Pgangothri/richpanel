@@ -1,0 +1,31 @@
+/* styles.css */
+.container {
+    display: flex;
+}
+
+.left-column {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.center-column {
+    flex: 2;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.right-column {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.conversation {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.conversation:hover {
+    background-color: #e0e0e0;
+}

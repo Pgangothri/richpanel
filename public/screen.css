@@ -1,0 +1,135 @@
+ /* CSS to style the blue column */
+        .blue-column {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100px; /* You can adjust the width as needed */
+            height: 100%; /* This will make the column cover the entire height of the viewport */
+            background-color: blue; /* Blue background color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .blue-column img {
+            margin-bottom: 20px;
+            width: 50px;
+        }
+        /* CSS to style the messages */
+        .messages {
+            position: fixed;
+            left: 100px; /* Ensure messages start after the blue column */
+            top: 0;
+            width: calc(100% - 1200px); /* Adjusted width to fit remaining space after the blue column */
+            height: 100%;
+            background-color: #f0f0f0; /* Light gray background color */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .message {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffffff; /* White background for messages */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+            cursor: pointer; /* Add cursor pointer for better interaction */
+        }
+        /* Add style for active message */
+        .message.active {
+            background-color: lightblue;
+        }
+        /* Right side chat interface */
+        /* Right side chat interface */
+/* Right side chat interface */
+.right-chat {
+    position: fixed;
+    right: 300px; /* Leave more space on the right side */
+    left: 500px; /* Adjust the value to leave one column space */
+    top: 0;
+    width: calc(100% - 835px); /* Adjust width as needed */
+    height: 100%;
+    background-color: white; /* Light gray background color */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-chat h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.right-chat p {
+    margin-bottom: 5px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    background-color: #d3d3d3;
+    max-width: 70%;
+}
+
+.right-chat .reply-container {
+    margin-top: auto; /* Push the reply container to the bottom */
+    display: flex;
+    flex-direction: column;
+}
+
+.right-chat input[type="text"] {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add margin bottom to create space between input and button */
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background-color: #f0f0f0; /* Light gray background color */
+    color: #333; /* Text color */
+    font-size: 16px; /* Adjust font size as needed */
+    width: calc(100% - 40px); /* Adjust width to fit the container */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.right-chat button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    align-self: flex-end; /* Align the button to the end (bottom) */
+}
+
+.right-chat button:hover {
+    background-color: #0056b3;
+}
+.profile {
+    position: fixed;
+    right: 0; /* Leave more space on the right side */
+    left: 1300px; /* Adjust the value to leave one column space */
+    top: 0;
+    width: calc(100% - 10px); /* Adjust width as needed */
+    height: 100%;
+    background-color: white; /* Light gray background color */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.profile-details{
+    flex:1;
+}
+.profile-area {
+    width: ;
+    padding: 20px;
+}

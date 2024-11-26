@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp-like Chat</title>
+    <link rel="stylesheet" href="/screen.css">
+</head>
+<body>
+
+<!-- Blue column -->
+<div class="blue-column">
+    <!-- Added IDs to the images for easier identification -->
+    <a href="#" id="image1"><img src="https://tse4.mm.bing.net/th?id=OIP.vs7BtkNVU6pwPsANbdnvWQHaHa&pid=Api&P=0&h=180" alt="Image 1"></a>
+    <a href="#" id="image2"><img src="https://tse4.mm.bing.net/th?id=OIP.oXzqq6dnQIUDZyv3Pha69QHaHa&pid=Api&P=0&h=180" alt="Image 2"></a>
+</div>
+
+<!-- Messages -->
+<div class="messages" id="messages">
+    <!-- Messages will be displayed here -->
+</div>
+
+<!-- Right side chat interface -->
+<div class="right-chat" id="rightChat">
+    <!-- Active message details will be displayed here -->
+</div>
+<div class="profile-area" id="profileContainer">
+    <!-- Profile information will be displayed here -->
+</div>
+
+<script>
+    // Get reference to the chat icon
+    const chatIcon = document.getElementById('image1');
+
+    // Add event listener to the chat icon
+    chatIcon.addEventListener('click', () => {
+        // Fetch and display all conversations
+        displayAllConversations();
+    });
+
+    // Function to fetch and display all conversations
+    async function displayAllConversations() {
+        try {
+            // Simulated conversations data for demonstration
+            const response = await fetch('/conversations');
+        
+        // Check if the request was successful (status code 200)
+        if (!response.ok) {
+            throw new Error('Failed to fetch conversations');
+        }
+        
+        // Parse the JSON response
+        const conversations = await response.json();
+
+            // Generate HTML to display the conversations
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.innerHTML = ''; // Clear previous content
+            conversations.forEach((conversation, index) => {
+                // Create a div element for each conversation message
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.innerHTML = `<p>Name: ${conversation.name}</p>`;
+                messageDiv.innerHTML += `<p>Last Active: ${conversation.last_active}</p>`;
+                messageDiv.innerHTML += `<p>Message: ${conversation.message}</p>`;
+                // Add event listener to display only the clicked conversation
+                messageDiv.addEventListener('click', () => {
+                    // Remove 'active' class from all message divs
+                    document.querySelectorAll('.message').forEach(msg => msg.classList.remove('active'));
+                    // Add 'active' class to the clicked message div
+                    messageDiv.classList.add('active');
+                    // Display the right side chat interface with active message details
+                    displayRightChatInterface(conversation);
+                    displayprofile(conversation)
+                });
+                // Append the message div to the messages container
+                messagesContainer.appendChild(messageDiv);
+            });
+        } catch (error) {
+            console.error('Error fetching conversations:', error);
+        }
+    }
+    function displayprofile(conversation){
+    const profileContainer = document.getElementById('profileContainer');
+    profileContainer.innerHTML = `
+        <div class="profile">
+            <img src="https://tse3.mm.bing.net/th?id=OIP._7TqVr0-m8k5c50wOraTUAHaJQ&pid=Api&P=0&h=180" alt="Profile Picture">
+            <div class="profile-details">
+                <h2>${conversation.name}</h2>
+                <p>Status: Online</p>
+            </div>
+        </div>
+    `;
+}
+
+    // Function to display the right side chat interface with active message details
+    function displayRightChatInterface(conversation) {
+        const rightChat = document.getElementById('rightChat');
+        rightChat.innerHTML = `
+        
+            <h2>Chat with ${conversation.name}</h2>
+            <div class="chat-messages">
+                <p><strong>${conversation.name}</strong>: ${conversation.message}</p>
+                <!-- Previous messages can be dynamically generated here -->
+            </div>
+            <div class="reply-container">
+                <input type="text" id="replyInput" placeholder="Type your reply...">
+            </div>
+        `;
+        
+        // Get reference to the reply input field
+        const replyInput = document.getElementById('replyInput');
+
+        // Add event listener for Enter key press on the reply input field
+        replyInput.addEventListener('keydown', handleReply);
+    }
+
+    // Function to handle sending a reply
+    function handleReply(event) {
+        if (event.key === 'Enter') { // Check if the pressed key is Enter
+            sendReply(); // Call the sendReply function
+            event.preventDefault(); // Prevent the default behavior of the Enter key (form submission)
+        }
+    }
+
+    // Function to send a reply
+    function sendReply() {
+        // Get the input field value
+        const replyInput = document.getElementById('replyInput');
+        const replyMessage = replyInput.value.trim();
+
+        if (replyMessage !== '') { // Check if the message is not empty
+            // Display the sent message (for demonstration)
+            const chatMessages = document.querySelector('.chat-messages');
+            const newMessage = document.createElement('p');
+            newMessage.innerHTML = `<strong>You</strong>: ${replyMessage}`;
+            chatMessages.appendChild(newMessage);
+            // Clear the input field
+            replyInput.value = '';
+        }
+    }
+
+    // Initially fetch and display conversations
+    //displayAllConversations();
+</script>
+
+</body>
+</html>

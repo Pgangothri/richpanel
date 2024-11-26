@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage FB Page</title>
+    <link rel="stylesheet" href="/manage.css">
+    <style>
+        .container {
+            position: relative;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-top: 20px; /* Adjust as needed */
+            margin-right: 20px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Manage FB Page</h2>
+        <% if (fbPageConnection) { %>
+            <div class="fb-page-connection">
+                <p>You are connected to the Facebook page with ID: <span class="fb-page-id"><%= fbPageConnection.page_id %></span></p>
+                <div>
+                    <form action="/disconnect-fb-page" method="post">
+                        <button type="submit" class="btn btn-danger">Disconnect</button>
+                    </form>
+                </div>
+                <div>
+                    <form action="/agent" method="post">
+                        <button type="submit" class="btn btn-primary">Reply Messages</button>
+                    </form>
+                </div>
+            </div>
+        <% } else { %>
+            <p>You are not connected to any Facebook page.</p>
+            <!-- Existing HTML code -->
+            <form action="/connect-fb-page" method="post">
+                <div class="form-group">
+                    <label for="pageId">Enter Facebook Page ID:</label>
+                    <input type="text" id="pageId" name="pageId" required>
+                </div>
+                <div class="form-group"> <!-- Add a new form group for the access token -->
+                    <label for="accessToken">Access Token:</label>
+                    <input type="text" id="accessToken" name="accessToken" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Connect</button>
+            </form>
+        <% } %>
+        <a href="/login" class="btn btn-secondary btn-back">Back to Login</a>
+    </div>
+</body>
+</html>
